@@ -1,5 +1,7 @@
 # e007_flutter_reorderable_listview_e004base
 
+![app screen record](docs/screen_record.gif)
+
 ## Step 1
 
     ReorderableListView(
