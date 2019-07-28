@@ -155,26 +155,8 @@ class _TasksPageWidgetState extends State<TasksPageWidget> {
         ],
       ),
       body: ReorderableListView(
-        children: <Widget>[
-          for (final task in tasks)
-            TaskWidget(
-              key: Key(task.guid),
-              taskOpj: task,
-              notifyParent: refresh,
-            ),
-        ],
-        onReorder: (oldIndex, newIndex) {
-          if (newIndex > oldIndex) {
-            newIndex -= 1;
-          }
-          setState(() {
-            if (newIndex > oldIndex) {
-              newIndex -= 1;
-            }
-            final TaskOpj item = tasks.removeAt(oldIndex);
-            tasks.insert(newIndex, item);
-          });
-        },
+        children: _children(),
+        onReorder: _reorder,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
@@ -191,6 +173,33 @@ class _TasksPageWidgetState extends State<TasksPageWidget> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  List<Widget> _children() {
+    var children = <Widget>[];
+    for (final task in tasks)
+      children.add(
+        TaskWidget(
+          key: Key(task.guid),
+          taskOpj: task,
+          notifyParent: refresh,
+        ),
+      );
+    return children;
+  }
+
+  void _reorder(oldIndex, newIndex) {
+    try {
+      setState(() {
+        if (newIndex > oldIndex) {
+          newIndex -= 1;
+        }
+        final TaskOpj item = tasks.removeAt(oldIndex);
+        tasks.insert(newIndex, item);
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 

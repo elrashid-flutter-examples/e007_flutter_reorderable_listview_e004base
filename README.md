@@ -1,16 +1,70 @@
 # e007_flutter_reorderable_listview_e004base
 
-A new Flutter project.
+## Step 1
 
-## Getting Started
+    ReorderableListView(
+    children: <Widget>[
+    ],
 
-This project is a starting point for a Flutter application.
+## Step 2
 
-A few resources to get you started if this is your first Flutter project:
+    children: <Widget>[
+        for (final task in tasks)
+        TaskWidget(
+            key: Key(task.guid),
+            taskOpj: task,
+            notifyParent: refresh,
+        ),
+    ], 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Step 3
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    onReorder: (oldIndex, newIndex) {
+        if (newIndex > oldIndex) {
+        newIndex -= 1;
+        }
+        setState(() {
+        if (newIndex > oldIndex) {
+            newIndex -= 1;
+        }
+        final TaskOpj item = tasks.removeAt(oldIndex);
+        tasks.insert(newIndex, item);
+        });
+    },
+
+## Full code
+
+    ReorderableListView(
+    children: <Widget>[
+        for (final task in tasks)
+        TaskWidget(
+            key: Key(task.guid),
+            taskOpj: task,
+            notifyParent: refresh,
+        ),
+    ],
+    onReorder: (oldIndex, newIndex) {
+        if (newIndex > oldIndex) {
+        newIndex -= 1;
+        }
+        setState(() {
+        if (newIndex > oldIndex) {
+            newIndex -= 1;
+        }
+        final TaskOpj item = tasks.removeAt(oldIndex);
+        tasks.insert(newIndex, item);
+        });
+    },
+    )
+
+## Ref
+
+- [ReorderableListView (Flutter Widget of the Week) - YouTube](https://www.youtube.com/watch?v=3fB1mxOsqJE&list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG&index=43)
+
+- [ReorderableListView class - material library - Dart API](https://api.flutter.dev/flutter/material/ReorderableListView-class.html)
+
+- [Search · ReorderableListView](https://github.com/flutter/flutter/search?q=ReorderableListView&unscoped_q=ReorderableListView)
+
+- [flutter/reorderable_list_test.dart at 3c93b65a9bcc8aa723231eff4eb0a7e19b2daccf · flutter/flutter](https://github.com/flutter/flutter/blob/3c93b65a9bcc8aa723231eff4eb0a7e19b2daccf/packages/flutter/test/material/reorderable_list_test.dart)
+
+- [flutter/reorderable_list_demo.dart at 8c5a41113e2c0731147fe62a941ca33b9a1e8e8a · flutter/flutter](https://github.com/flutter/flutter/blob/8c5a41113e2c0731147fe62a941ca33b9a1e8e8a/examples/flutter_gallery/lib/demo/material/reorderable_list_demo.dart)
