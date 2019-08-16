@@ -1,6 +1,20 @@
 # e007_flutter_reorderable_listview_e004base
 
+## Based On e004
+
+- [elrashid-flutter-examples/e004_flutter_listview_crud_app_using_nonsecure_rest_api](https://github.com/elrashid-flutter-examples/e004_flutter_listview_crud_app_using_nonsecure_rest_api)
+
+## Screen Record
+
 ![app screen record](docs/screen_record.gif)
+
+## What
+
+- ReorderableListView for tasks in flutter Task app (e004)
+
+- must run with :
+
+  - [elrashid-flutter-examples/e002-aspcore-rest-api-server-for-flutter](https://github.com/elrashid-flutter-examples/e002-aspcore-rest-api-server-for-flutter)
 
 ## Step 1
 
@@ -58,6 +72,21 @@
         });
     },
     )
+
+## Note
+
+- key must be unique
+
+      key: Key(task.guid)
+
+- from [API Docs](https://api.flutter.dev/flutter/material/ReorderableListView-class.html) :
+
+  > All children must have a key.
+
+- For more understanding of **key** watch:
+
+  - [When to Use Keys - Flutter Widgets 101 Ep. 4 - YouTube](https://www.youtube.com/watch?v=kn0EOS-ZiIc)
+
 
 ## Ref
 
